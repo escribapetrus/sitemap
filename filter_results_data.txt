@@ -1,0 +1,2 @@
+https://www.tim.com.br/Portal_Conteudo/_staticfiles/sitemap_perguntas-frequentes.xml
+Todas as URL são redirect
