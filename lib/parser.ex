@@ -1,16 +1,8 @@
-defmodule Sitemap.GetSitemap do
+defmodule Sitemap.Parser do
+
   import SweetXml
 
-  def get_sitemap(url) do
-    case HTTPoison.get(url) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        body
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        "Not found"
-      {:error, %HTTPoison.Error{reason: reason}} ->
-        reason
-    end
-  end
+
 
   #enter and xml file containing urls as <loc>http://example.com</loc> and the program will make a list of urls
   def get_urls_from_sitemap(xml) do
@@ -28,7 +20,7 @@ defmodule Sitemap.GetSitemap do
   end
 
   #function checks whether url request status is 200 or not, returning true or false
-  def validate_url_status(url) do
+  defp validate_url_status(url) do
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200}} -> true
       _ -> false

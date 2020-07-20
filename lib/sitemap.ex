@@ -1,4 +1,7 @@
 defmodule Sitemap do
+  alias Sitemap.UseXml
+  alias Sitemap.Parser
+
   @moduledoc """
   Documentation for `Sitemap`.
   """
@@ -12,7 +15,11 @@ defmodule Sitemap do
       :world
 
   """
-  def hello do
-    :world
+  #enter the url to a sitemap .xml
+  def get_urls(url) do
+    url
+    |> UseXml.get_xml()
+    |> Parser.get_urls_from_sitemap()
   end
+
 end
