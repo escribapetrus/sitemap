@@ -15,7 +15,7 @@ defmodule Sitemap.UseXml do
   def gen_xml(dataset) do
     sitemap =
       dataset
-      |> Enum.map(fn x -> element(:loc, [element(:url, x)]) end)
+      |> Enum.map(fn x -> element(:url, [element(:loc, x)]) end)
       # |> Enum.map(fn x -> element(:url, x) end)
     document(:urlset, sitemap) |> generate()
   end

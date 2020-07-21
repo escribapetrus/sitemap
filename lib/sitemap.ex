@@ -45,4 +45,15 @@ defmodule Sitemap do
     |> Enum.filter(fn x -> !String.match?(x, ~r/servicos-tim/) end)
   end
 
+  def gen_sitemap(section_string) do
+    urls_old = "https://www.tim.com.br/Portal_Conteudo/_staticfiles/sitemap_#{section_string}.xml" |> get_urls_from_sitemap()
+    urls_new = Sitemap.ImportDocument.get_dataset_from_file("urls_novas.txt") |> Enum.filter(fn x -> String.match?(x, ~r/#{section_string}/) end)
+    urls = urls_new ++ urls_old |> Enum.uniq
+    urls |> save_sitemap_file(section_string)
+  end
+
+  def sections do
+    ["atendimento", "cobertura-e-roaming", "diversao", "internet", "perguntas-frequentes", "planos", "recarga", "servicos-tim"]
+  end
+
 end

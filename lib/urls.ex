@@ -1,11 +1,12 @@
 defmodule Sitemap.Urls do
+
   import SweetXml
 
   #enter and xml file containing urls as <loc>http://example.com</loc> and the program will make a list of urls
   def get_urls_from_sitemap(xml) do
     xml
-    |> stream_tags(:url)
-    |> Stream.map(fn {:url, xml} -> xml |> xpath(~x"./text()") end)
+    |> stream_tags(:loc)
+    |> Stream.map(fn {:loc, xml} -> xml |> xpath(~x"./text()") end)
     |> Enum.to_list()
     |> Enum.map(fn x -> x |> to_string() |> clean_url() end)
     # |> Enum.map(fn x -> String.replace(x, "\n", "") end)
