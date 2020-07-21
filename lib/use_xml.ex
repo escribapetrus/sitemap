@@ -15,12 +15,13 @@ defmodule Sitemap.UseXml do
   def gen_xml(dataset) do
     sitemap =
       dataset
-      |> Enum.map(fn x -> element(:url, x) end)
-    document(:sitemap, sitemap) |> generate()
+      |> Enum.map(fn x -> element(:loc, [element(:url, x)]) end)
+      # |> Enum.map(fn x -> element(:url, x) end)
+    document(:urlset, sitemap) |> generate()
   end
 
-  def save_tofile(data, filename) do
-    {:ok, file} = File.open(filename, [:write])
+  def save_tofile(data,filename) do
+    {:ok, file} = File.open("sitemap_#{filename}.xml", [:write])
     IO.binwrite(file, data)
     File.close(file)
   end
