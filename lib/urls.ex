@@ -7,7 +7,7 @@ defmodule Sitemap.Urls do
     xml
     |> stream_tags(:loc)
     |> Stream.map(fn {:loc, xml} -> xml |> xpath(~x"./text()") end)
-    |> Enum.to_list()
+    |> Enum.to_list
     |> Enum.map(fn x -> x |> to_string() |> clean_url() end)
     # |> Enum.map(fn x -> String.replace(x, "\n", "") end)
     # |> Enum.map(fn x -> String.trim(x) end)

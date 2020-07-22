@@ -3,12 +3,10 @@ defmodule Sitemap.ImportDocument do
 
   def get_dataset_from_file(filename) do
     filename
-    |> Path.expand()
+    |> Path.expand
     |> File.stream!
     |> Enum.map(fn x -> clean_url(x) end)
-    |> Enum.uniq()
+    |> Enum.uniq
   end
 
-
-  #### PARA FAZER: REMOVER PARAMETROS DE BUSCA DAS URLS
 end
